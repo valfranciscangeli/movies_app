@@ -22,7 +22,6 @@ class HomeScreen extends StatelessWidget {
 
               // slider de peliculas
               MovieSlider(),
-              MovieSlider()
             ],
           ),
         ));
