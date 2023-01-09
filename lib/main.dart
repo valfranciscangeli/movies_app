@@ -3,18 +3,21 @@ import 'package:movies_app/providers/movies_provider.dart';
 import 'package:movies_app/screens/screens.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(AppState());
-
+void main() => runApp(const AppState());
 
 class AppState extends StatelessWidget {
+  const AppState({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => MoviesProvider(), lazy: false,) // el provider se inicializa de forma perezosa
+        ChangeNotifierProvider(
+          create: (context) => MoviesProvider(),
+          lazy: false,
+        ) // el provider se inicializa de forma perezosa
       ],
-      child: MyApp(),
+      child: const MyApp(),
     );
   }
 }
@@ -22,10 +25,9 @@ class AppState extends StatelessWidget {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Peliculas',
       initialRoute: 'home',
@@ -34,11 +36,10 @@ class MyApp extends StatelessWidget {
         'details': (_) => const DetailsScreen(),
       },
       theme: ThemeData.light().copyWith(
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.amber,
-          elevation: 0,
-        )
-      ),
+          appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.amber,
+        elevation: 0,
+      )),
     );
   }
 }

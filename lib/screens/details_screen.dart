@@ -43,7 +43,7 @@ class _CustomAppBar extends StatelessWidget {
         centerTitle: true,
         titlePadding: const EdgeInsets.all(0),
         title: Container(
-          padding: EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 10),
             width: double.infinity,
             alignment: Alignment.bottomCenter,
             color: Colors.black12,
@@ -121,7 +121,7 @@ class _PosterAndTitle extends StatelessWidget {
 }
 
 class _Overview extends StatelessWidget {
-  const _Overview({super.key});
+  const _Overview();
 
   @override
   Widget build(BuildContext context) {
