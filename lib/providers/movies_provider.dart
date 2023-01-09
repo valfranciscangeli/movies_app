@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:movies_app/models/models.dart';
-import 'package:movies_app/search/search_delegate.dart';
 
 class MoviesProvider extends ChangeNotifier {
   final String _apikey = 'f5f4c74cac0a87d200eca1933ab7dcf0';
