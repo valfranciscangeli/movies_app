@@ -9,7 +9,6 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments
         as Movie; // sacamos la pelicula de los argumentos de la ruta
-    print(movie.title);
 
     return Scaffold(
         body: CustomScrollView(
@@ -22,9 +21,18 @@ class DetailsScreen extends StatelessWidget {
               title: movie.title,
               poster: movie.fullPosterImg,
               originalTitle: movie.originalTitle,
-              voteAverage: movie.voteAverage.toString()),
-          _Overview(overview: movie.overview,),
-          CastingCards()
+              voteAverage: movie.voteAverage.toString(),
+              year: movie.releaseDate.substring(0,4)),
+          const SizedBox(
+            height: 20,
+          ),
+          _Overview(
+            overview: movie.overview,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          CastingCards(movieId: movie.id),
         ]))
       ],
     ));
@@ -35,7 +43,7 @@ class _CustomAppBar extends StatelessWidget {
   final String title;
   final String backdrop;
 
-  const _CustomAppBar({super.key, required this.title, required this.backdrop});
+  const _CustomAppBar({required this.title, required this.backdrop});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +66,7 @@ class _CustomAppBar extends StatelessWidget {
               textAlign: TextAlign.center,
             )),
         background: FadeInImage(
-          placeholder: AssetImage('assets/loading.gif'),
+          placeholder: const AssetImage('assets/loading.gif'),
           image: NetworkImage(backdrop),
           fit: BoxFit.cover,
         ),
@@ -71,19 +79,19 @@ class _PosterAndTitle extends StatelessWidget {
   final String poster;
   final String title;
   final String originalTitle;
+  final String year;
   final String voteAverage;
 
   const _PosterAndTitle(
-      {super.key,
-      required this.poster,
+      {required this.poster,
       required this.title,
       required this.originalTitle,
-      required this.voteAverage});
+      required this.voteAverage, required this.year});
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -101,20 +109,26 @@ final size = MediaQuery.of(context).size;
             width: 20,
           ),
           ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: size.width-190),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                    title,
-                    style: textTheme.headline5,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    softWrap: true,
-                  ),
+            constraints: BoxConstraints(maxWidth: size.width - 190),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                title,
+                style: textTheme.headline5,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                softWrap: true,
+              ),
               Text(
                 originalTitle,
                 style: textTheme.subtitle1,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              
+              Text(
+                year,
+                style: textTheme.subtitle2,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
@@ -133,9 +147,8 @@ final size = MediaQuery.of(context).size;
                     style: textTheme.caption,
                   ),
                 ],
-              )]
-              ),
-            
+              )
+            ]),
           )
         ],
       ),
@@ -146,7 +159,7 @@ final size = MediaQuery.of(context).size;
 class _Overview extends StatelessWidget {
   final String overview;
 
-  const _Overview({super.key, required this.overview});
+  const _Overview({required this.overview});
 
   @override
   Widget build(BuildContext context) {
