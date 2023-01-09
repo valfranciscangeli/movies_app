@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
@@ -16,6 +17,12 @@ class DetailsScreen extends StatelessWidget {
         SliverList(
             delegate: SliverChildListDelegate([
           _PosterAndTitle(),
+          const _Overview(),
+          
+          const _Overview(),
+          
+          const _Overview(),
+          const CastingCards()
         ]))
       ],
     ));
@@ -36,6 +43,7 @@ class _CustomAppBar extends StatelessWidget {
         centerTitle: true,
         titlePadding: const EdgeInsets.all(0),
         title: Container(
+          padding: EdgeInsets.only(bottom: 10),
             width: double.infinity,
             alignment: Alignment.bottomCenter,
             color: Colors.black12,
@@ -56,8 +64,7 @@ class _CustomAppBar extends StatelessWidget {
 class _PosterAndTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
-  final textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -109,6 +116,26 @@ class _PosterAndTitle extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  const _Overview({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    final textTheme = Theme.of(context).textTheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Text(
+          'Do aliqua amet eu amet et dolor nulla velit minim officia in culpa. Consectetur magna eiusmod qui labore. Excepteur excepteur cillum quis non tempor qui adipisicing elit fugiat reprehenderit ad. Incididunt dolor culpa et nostrud qui. Labore ullamco est aliqua nostrud dolore elit proident ea anim cillum.',
+          textAlign: TextAlign.justify,
+          style: textTheme.subtitle1,
+          ),
+  
+    
     );
   }
 }
