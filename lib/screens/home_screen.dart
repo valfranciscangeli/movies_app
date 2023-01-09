@@ -12,7 +12,6 @@ class HomeScreen extends StatelessWidget {
     final moviesProvider = Provider.of<MoviesProvider>(context,
         listen: true); // listen notifica cambios y llama a redibujar
 
-    print(moviesProvider.ondisplayMovies);
 
     return Scaffold(
         appBar: AppBar(
@@ -32,6 +31,7 @@ class HomeScreen extends StatelessWidget {
               MovieSlider(
                 movies: moviesProvider.popularMovies,
                 title: 'Populares', //opcional
+                onNextPage: moviesProvider.getPopularMovies,
                 
                 ),
             ],
