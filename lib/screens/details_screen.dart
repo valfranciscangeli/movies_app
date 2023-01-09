@@ -18,6 +18,7 @@ class DetailsScreen extends StatelessWidget {
         SliverList(
             delegate: SliverChildListDelegate([
           _PosterAndTitle(
+            id: movie.heroId!,
               title: movie.title,
               poster: movie.fullPosterImg,
               originalTitle: movie.originalTitle,
@@ -76,17 +77,19 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PosterAndTitle extends StatelessWidget {
+  final String id;
   final String poster;
   final String title;
   final String originalTitle;
   final String year;
   final String voteAverage;
 
+
   const _PosterAndTitle(
       {required this.poster,
       required this.title,
       required this.originalTitle,
-      required this.voteAverage, required this.year});
+      required this.voteAverage, required this.year, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -97,12 +100,15 @@ class _PosterAndTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(
-              image: NetworkImage(poster),
-              placeholder: const AssetImage('assets/no-image.jpg'),
-              height: 150,
+          Hero(
+            tag: id,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                image: NetworkImage(poster),
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                height: 150,
+              ),
             ),
           ),
           const SizedBox(
